@@ -1,0 +1,163 @@
+// Reset
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+// Font Families
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto&display=swap');
+$header-font: 'Roboto', sans-serif;
+$text-font: 'Open Sans', sans-serif;
+
+
+%box-sizing {
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+// Reusable classes
+$breakpoints:(
+    "xl": 1440px,
+    "lg": 1024px,
+    "md": 768px,
+    "sm": 575px,
+    "xs": 425px
+);
+
+$col-margin: 5px;
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.col {
+    flex-grow:1;
+    max-width: 100%;
+    margin: 0 $col-margin;
+}
+
+@function calcWidth($n){
+    @return calc((#{$n}/12 * 100%) - 2 * #{$col-margin});
+}
+
+@each $key , $value in $breakpoints {
+    .container-#{$key} {
+        max-width: $value;
+        margin: 0 auto;
+    }
+
+    @media screen and (max-width:$value){
+        @for $i from 1 through 12 {
+            .col-#{$key}-#{$i} {
+                flex-grow: 0;
+                width:calcWidth($i);
+            }
+        }
+    }
+}
+
+
+/*  Padding classes */
+$paddings:(
+    "px": horizontal,
+    "py": vertical,
+    "pl": left,
+    "pr": right,
+    "pt": top,
+    "pb": bottom,
+);
+
+@each $key , $value in $paddings {
+    @for $i from 1 through 3 {
+        .#{$key}-#{$i} {
+            @if ($value == "horizontal") {
+                padding: 0 $i * 5px;                
+            }
+            @else if ($value == "vertical") {
+                padding: $i * 5px 0;                
+            }
+            
+            @else {
+                padding-#{$value}: $i * 5px;               
+            }
+            
+        }
+    }
+
+}
+
+/*  Margin classes */
+$margins:(
+    "mx": horizontal,
+    "my": vertical,
+    "ml": left,
+    "mr": right,
+    "mt": top,
+    "mb": bottom,
+);
+
+@each $key , $value in $margins {
+    @for $i from 1 through 3 {
+        .#{$key}-#{$i} {
+            @if ($value == "horizontal") {
+                margin: 0 $i * 5px;                
+            }
+            @else if ($value == "vertical") {
+                margin: $i * 5px 0;                
+            }
+            
+            @else {
+                margin-#{$value}: $i * 5px;               
+            }
+            
+        }
+    }
+
+}
