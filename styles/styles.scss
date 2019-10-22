@@ -161,3 +161,34 @@ $margins:(
     }
 
 }
+
+/* Buttons Classes */
+
+%btn-styling {
+    border:none;
+    border-radius:5px;
+    padding:10px 15px;
+    font-size:14px;
+    color: white;
+    cursor:pointer;
+}
+
+$btn-colors:(
+    "primary":#007bff,
+    "secondary":#a9a9a9,
+    "success":#008000,
+    "info":#17A2B8,
+    "warning":#fabc11,
+    "danger":#ff0000,
+);
+
+@each $key , $value in $btn-colors {
+    $clr:$value;
+    .btn-#{$key} {
+        @extend %btn-styling;
+        background-color:$value;
+        &:hover {
+            background-color: darken($clr,10%);
+        }
+    }
+}

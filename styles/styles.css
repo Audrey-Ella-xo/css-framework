@@ -617,4 +617,62 @@ table {
 .mb-3 {
   margin-bottom: 15px;
 }
+
+/* Buttons Classes */
+.btn-primary, .btn-secondary, .btn-success, .btn-info, .btn-warning, .btn-danger {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0062cc;
+}
+
+.btn-secondary {
+  background-color: #a9a9a9;
+}
+
+.btn-secondary:hover {
+  background-color: #909090;
+}
+
+.btn-success {
+  background-color: #008000;
+}
+
+.btn-success:hover {
+  background-color: #004d00;
+}
+
+.btn-info {
+  background-color: #17A2B8;
+}
+
+.btn-info:hover {
+  background-color: #117a8b;
+}
+
+.btn-warning {
+  background-color: #fabc11;
+}
+
+.btn-warning:hover {
+  background-color: #d49c04;
+}
+
+.btn-danger {
+  background-color: #ff0000;
+}
+
+.btn-danger:hover {
+  background-color: #cc0000;
+}
 /*# sourceMappingURL=styles.css.map */
