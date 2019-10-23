@@ -105,6 +105,8 @@ $col-margin: 5px;
 
 
 /*  Padding classes */
+$spacer:5px;
+
 $paddings:(
     "px": horizontal,
     "py": vertical,
@@ -118,14 +120,14 @@ $paddings:(
     @for $i from 1 through 3 {
         .#{$key}-#{$i} {
             @if ($value == "horizontal") {
-                padding: 0 $i * 5px;                
+                padding: 0 $i * $spacer;                
             }
             @else if ($value == "vertical") {
-                padding: $i * 5px 0;                
+                padding: $i * $spacer 0;                
             }
             
             @else {
-                padding-#{$value}: $i * 5px;               
+                padding-#{$value}: $i * $spacer;               
             }
             
         }
@@ -147,14 +149,14 @@ $margins:(
     @for $i from 1 through 3 {
         .#{$key}-#{$i} {
             @if ($value == "horizontal") {
-                margin: 0 $i * 5px;                
+                margin: 0 $i * $spacer;                
             }
             @else if ($value == "vertical") {
-                margin: $i * 5px 0;                
+                margin: $i * $spacer 0;                
             }
             
             @else {
-                margin-#{$value}: $i * 5px;               
+                margin-#{$value}: $i * $spacer;               
             }
             
         }
@@ -162,7 +164,7 @@ $margins:(
 
 }
 
-/* Buttons Classes */
+/* Buttons , Anchor Elements, Background-colors, Text color classes */
 
 %btn-styling {
     border:none;
@@ -173,7 +175,7 @@ $margins:(
     cursor:pointer;
 }
 
-$btn-colors:(
+$colors:(
     "primary":#007bff,
     "secondary":#a9a9a9,
     "success":#008000,
@@ -182,7 +184,7 @@ $btn-colors:(
     "danger":#ff0000,
 );
 
-@each $key , $value in $btn-colors {
+@each $key , $value in $colors {
     $clr:$value;
     .btn-#{$key} {
         @extend %btn-styling;
@@ -191,4 +193,38 @@ $btn-colors:(
             background-color: darken($clr,10%);
         }
     }
+
+    .a-#{$key} {
+        color:black;
+        text-decoration: none;
+        &:hover {
+            color: $value;
+        }
+    }
+
+    .bg-#{$key} {
+        background-color:$value;
+    }
+
+    .text-#{$key} {
+        color:$value;
+    }
+
 }
+
+/* Text utility classes */
+
+$font-weights:(
+    "bold":700,
+    "bolder":900,
+    "light":300,
+    "lighter":200,
+    "normal":400
+);
+
+@each $key , $value in $font-weights {
+    .font-weight-#{$key} {
+        font-weight:$value;
+    }
+}
+
