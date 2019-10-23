@@ -1,5 +1,4 @@
 images
 package-lock.json
 styles/*.scss
-styles/*.css
 styles/*.css.map
