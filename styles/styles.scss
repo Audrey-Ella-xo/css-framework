@@ -20,8 +20,6 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
-	font: inherit;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -228,3 +226,17 @@ $font-weights:(
     }
 }
 
+/* Text alignment classes */
+
+$text-align:(
+    "justify":justify,
+    "left":left,
+    "right":right,
+    "center":center
+);
+
+@each $key , $value in $text-align {
+    .text-align-#{$key} {
+        text-align:$value;
+    }
+}
