@@ -1,0 +1,400 @@
+// Reset
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+// Font Families
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto&display=swap');
+$header-font: 'Roboto', sans-serif;
+$text-font: 'Open Sans', sans-serif;
+
+
+%box-sizing {
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+// Reusable classes
+$breakpoints:(
+    "xl": 1440px,
+    "lg": 1024px,
+    "md": 768px,
+    "sm": 575px,
+    "xs": 425px
+);
+
+$gutter: 5px;
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.col {
+    flex-grow:1;
+    max-width: 100%;
+    margin: 0 $gutter;
+}
+
+@function calcWidth($n){
+    @return calc((#{$n}/12 * 100%) - 2 * #{$gutter});
+}
+
+@each $key , $value in $breakpoints {
+    .container-#{$key} {
+        max-width: $value;
+        margin: 0 auto;
+    }
+
+    @media screen and (max-width:$value){
+        @for $i from 1 through 12 {
+            .col-#{$key}-#{$i} {
+                flex-grow: 0;
+                width:calcWidth($i);
+            }
+        }
+    }
+}
+
+
+/*  Padding classes */
+$spacer:5px;
+
+$paddings:(
+    "px": horizontal,
+    "py": vertical,
+    "pl": left,
+    "pr": right,
+    "pt": top,
+    "pb": bottom,
+);
+
+@each $key , $value in $paddings {
+    @for $i from 1 through 3 {
+        .#{$key}-#{$i} {
+            @if ($value == "horizontal") {
+                padding: 0 $i * $spacer;                
+            }
+            @else if ($value == "vertical") {
+                padding: $i * $spacer 0;                
+            }
+            
+            @else {
+                padding-#{$value}: $i * $spacer;               
+            }
+            
+        }
+    }
+
+}
+
+/*  Margin classes */
+$margins:(
+    "mx": horizontal,
+    "my": vertical,
+    "ml": left,
+    "mr": right,
+    "mt": top,
+    "mb": bottom,
+);
+
+@each $key , $value in $margins {
+    @for $i from 1 through 3 {
+        .#{$key}-#{$i} {
+            @if ($value == "horizontal") {
+                margin: 0 $i * $spacer;                
+            }
+            @else if ($value == "vertical") {
+                margin: $i * $spacer 0;                
+            }
+            
+            @else {
+                margin-#{$value}: $i * $spacer;               
+            }
+            
+        }
+    }
+
+}
+
+/* Buttons , Anchor Elements, Background-colors, Text color classes */
+
+%btn-styling {
+    border:none;
+    border-radius:5px;
+    padding:10px 15px;
+    font-size:14px;
+    color: white;
+    cursor:pointer;
+}
+
+$colors:(
+    "primary":#007bff,
+    "secondary":#a9a9a9,
+    "success":#008000,
+    "info":#17A2B8,
+    "warning":#fabc11,
+    "danger":#f00,
+);
+
+@each $key , $value in $colors {
+    $clr:$value;
+    .btn-#{$key} {
+        @extend %btn-styling;
+        background-color:$value;
+        &:hover {
+            background-color: darken($clr,10%);
+        }
+    }
+
+    .a-#{$key} {
+        color:black;
+        text-decoration: none;
+        &:hover {
+            color: $value;
+        }
+    }
+
+    .bg-#{$key} {
+        background-color:$value;
+    }
+
+    .text-#{$key} {
+        color:$value;
+    }
+
+}
+
+/* Text utility classes */
+
+$font-weights:(
+    "bold":700,
+    "bolder":900,
+    "light":300,
+    "lighter":200,
+    "normal":400
+);
+
+@each $key , $value in $font-weights {
+    .font-weight-#{$key} {
+        font-weight:$value;
+    }
+}
+
+/* Text alignment classes */
+
+$text-align:(
+    "justify":justify,
+    "left":left,
+    "right":right,
+    "center":center
+);
+
+@each $key , $value in $text-align {
+    .text-align-#{$key} {
+        text-align:$value;
+    }
+}
+
+/* Display Utilities */
+$display-utilities:(
+    "inline":inline,
+    "inline-block":inline-block,
+    "block":block,
+    "table":table,
+    "none":none,
+    "flex":flex,
+    "inline-flex":inline-flex,
+    "hide":hidden
+);
+
+@each $key, $value in $display-utilities {
+    @if $value==hidden {
+        .d-#{$key} {
+            visibility: $value;
+        }    
+    }
+    @else {
+        .d-#{$key} {
+            display: $value;
+        }
+    }
+    
+}
+
+/* Flex box Utilities */
+
+.flex-direction-col {
+	flex-direction: column;
+}
+.flex-direction-row {
+	flex-direction: row;
+}
+.flex-direction-col-reverse {
+	flex-direction: column-reverse;
+}
+.flex-direction-row-reverse {
+	flex-direction: row-reverse;
+}
+.flex-wrap-reverse {
+	flex-wrap: wrap-reverse;
+}
+.flex-no-wrap {
+	flex-wrap: nowrap;
+}
+.flex-wrap {
+	flex-wrap: wrap;
+}
+.justify-content-center {
+	justify-content: center;
+}
+.justify-content-flex-start {
+	justify-content: flex-start;
+}
+.justify-content-flex-end {
+	justify-content: flex-end;
+}
+.justify-content-space-between {
+	justify-content: space-between;
+}
+.justify-content-space-around {
+	justify-content: space-around;
+}
+.justify-content-space-evenly {
+	justify-content: space-evenly;
+}
+.align-content-center {
+	align-content: center;
+}
+.align-content-flex-start {
+	align-content: flex-start;
+}
+.align-content-flex-end {
+	align-content: flex-end;
+}
+.align-content-space-between {
+	align-content: space-between;
+}
+.align-content-space-around {
+	align-content: space-around;
+}
+.align-content-space-evenly {
+	align-content: space-evenly;
+}
+.justify-items-center {
+	justify-items: center;
+}
+.justify-items-flex-start {
+	justify-items: flex-start;
+}
+.justify-items-flex-end {
+	justify-items: flex-end;
+}
+.justify-items-stretch {
+	justify-items: stretch;
+}
+.align-items-center {
+	align-items: center;
+}
+.align-items-flex-start {
+	align-items: flex-start;
+}
+.align-items-flex-end {
+	align-items: flex-end;
+}
+.align-items-stretch {
+	align-items: stretch;
+}
+.justify-self-center {
+	justify-self: center;
+}
+.justify-self-start {
+	justify-self: start;
+}
+.justify-self-end {
+	justify-self: end;
+}
+.justify-self-stretch {
+	justify-self: stretch;
+}
+.align-self-center {
+	align-self: center;
+}
+.align-self-start {
+	align-self: start;
+}
+.align-self-end {
+	align-self: end;
+}
+.align-self-strectch {
+	align-self: stretch;
+}
+
+/* Positioning Utilities */
+.position-absolute {
+	position: absolute;
+}
+.position-relative {
+	position: relative;
+}
+.position-sticky {
+	position: sticky;
+}
+.position-static {
+	position: static;
+}
+.position-fixed {
+	position: fixed;
+}
+
+/* Image fluid style */
+
+.img-fluid {
+    width:100%;
+    height:auto;
+}
